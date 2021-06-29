@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bloggies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Boxicon awesome icon -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"">
+  </head>
+  <body>
+
+    <!-- header -->
+    <header>
+      <nav class = "navbar">
+        <div class = "container">
+          <a href = "{% url 'blog:home' %}" class = "navbar-brand">Academy.Omen</a>
+          <div class = "navbar-nav">
+            <a href = "{% url 'blog:home' %}">home</a>
+            <a href = "{% url 'blog:articles' %}">articles</a>
+            <a href = "">about</a>
+          </div>
+        </div>
+      </nav>
+      <div class = "banner">
+        <div class = "container">
+          <h1 class = "banner-title">
+            <span>Omen.</span> Bloggies
+          </h1>
+          <p>everything you need to know about building a Sass with Django</p>
+        </div>
+      </div>
+    </header>
+    <!-- end of header -->
+    
+    <!-- featured -->
+    <section class = "featured" id = "featured">
+      <div class = "container">
+        <div class = "title">
+          <h2>Featured articles</h2>
+        </div>
+
+        <div class = "featured-content">
+          {% for article in articles %}
+          <!-- item -->
+          <div class = "featured-item">
+            <div class = "featured-img">
+              <a href="{{ article.get_absolute_url }}">
+                <img src = "{{ article.image.url }}" alt = "">
+                <span><i class='bx bx-calendar-star'></i>{{ article.publish|date:"M Y" }}</span>
+                <span>{{ article.sub_headline }}</span>
+              </a>
+            </div>
+            <div class = "featured-title">
+              <a href = "{{ article.get_absolute_url }}">{{ article.headline }}</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          {% empty %}
+			      <h3>No Featured Article at the Moment...</h3>  
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- end of featured -->
+
+    <!-- about -->
+    <section class = "about" id = "about">
+      <div class = "container">
+        <div class = "about-content">
+          <div>
+            <img src = "{% static 'images/about.jpg' %}" alt = "">
+          </div>
+          <div class = "about-text">
+            <div class = "title">
+              <h2>Catherine Doe</h2>
+              <p>art & design is my passion</p>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id totam voluptatem saepe eius ipsum nam provident sapiente, natus et vel eligendi laboriosam odit eos temporibus impedit veritatis ut, illo deserunt illum voluptate quis beatae quod. Necessitatibus provident dicta consectetur labore!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam corrupti natus, eos quia recusandae voluptatem veniam modi officiis minima provident rem sint porro fuga quos tempora ea suscipit vero velit sed laudantium eaque necessitatibus maxime!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of about -->
+
+    <!-- footer -->
+    <footer>
+      <div class = "social-links">
+        <a href = "#"><i class='bx bxl-facebook'></i></a>
+        <a href = "#"><i class='bx bxl-twitter'></i></a>
+        <a href = "#"><i class='bx bxl-instagram'></i></a>
+        <a href = "#"><i class='bx bxl-github'></i></a>
+      </div>
+      <span>Academy.Omen Bloggies</span>
+    </footer>
+    <!-- end of footer -->
+    
+    
+  </body>
+</html>
