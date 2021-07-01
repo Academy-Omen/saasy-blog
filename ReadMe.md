@@ -1,5 +1,7 @@
 ## Build A SAAS With Django
 
+### Introduction
+
 -> What is a Saas and How to build a Saas
 
 -> Clone Project files or use your project files
@@ -37,4 +39,24 @@ python manage.py runserver
 ```bash
 pip install django-tenants
 pip freeze > requirements.txt
+```
+### Setup [Django Tenants](https://django-tenants.readthedocs.io/en/latest/install.html)
+
+-> Setup Database
+```py
+# Setup Postgres database in settings.py
+DATABASES = {
+    'default': {
+        # Tenant Engine
+        'ENGINE': 'django_tenants.postgresql_backend',
+        # set database name
+        'NAME': 'saasy-blog',
+        # set your user details
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'POST': '5432'
+    }
+}
+
 ```
