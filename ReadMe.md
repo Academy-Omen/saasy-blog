@@ -42,8 +42,18 @@ pip freeze > requirements.txt
 ```
 ### Setup [Django Tenants](https://django-tenants.readthedocs.io/en/latest/install.html)
 
--> Setup Database
+-> Setup Middleware and Database
 ```py
+
+MIDDLEWARE = [
+    # add this add the top
+    # django tenant middleware
+    'django_tenants.middleware.main.TenantMainMiddleware',
+
+    #........
+]
+
+
 # Setup Postgres database in settings.py
 DATABASES = {
     'default': {
@@ -58,5 +68,51 @@ DATABASES = {
         'POST': '5432'
     }
 }
+
+# DATABASE ROUTER
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
+```
+
+-> Setup SHARED_APPS and TENANT_APPS
+```py
+# Application definition
+"""
+    These app's data are stored on the public schema
+"""
+SHARED_APPS = [
+    'django_tenants',  # mandatory
+    'tenant',  # you must list the app where your tenant model resides in
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'ckeditor',
+    'ckeditor_uploader',
+]
+"""
+    These app's data are stored on their specific schemas
+"""
+TENANT_APPS = [
+    # The following Django contrib apps must be in TENANT_APPS
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+
+    # tenant-specific apps
+    'blog',
+]
+
+INSTALLED_APPS = list(SHARED_APPS) + [
+    app for app in TENANT_APPS if app not in SHARED_APPS
+]
 
 ```

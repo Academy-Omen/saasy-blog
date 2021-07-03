@@ -29,8 +29,13 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+"""
+    These app's data are stored on the public schema
+"""
+SHARED_APPS = [
+    'django_tenants',  # mandatory
+    'tenant',  # you must list the app where your tenant model resides in
 
-INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,13 +43,33 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'blog',
-
     'ckeditor',
     'ckeditor_uploader',
 ]
+"""
+    These app's data are stored on their specific schemas
+"""
+TENANT_APPS = [
+    # The following Django contrib apps must be in TENANT_APPS
+    'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+
+    # tenant-specific apps
+    'blog',
+]
+
+INSTALLED_APPS = list(SHARED_APPS) + [
+    app for app in TENANT_APPS if app not in SHARED_APPS
+]
 
 MIDDLEWARE = [
+    # add this add the top
+    # django tenant middleware
+    'django_tenants.middleware.main.TenantMainMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,6 +89,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                # django_tenant finds tenant upon request
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -98,6 +124,11 @@ DATABASES = {
         'POST': '5432'
     }
 }
+
+# DATABASE ROUTER
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
 
 
 # Password validation
