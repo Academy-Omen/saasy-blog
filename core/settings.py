@@ -45,6 +45,10 @@ SHARED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+
+    # we place blog here since we want 
+    # public schema to have the same structure like tenant apps
+    'blog',
 ]
 """
     These app's data are stored on their specific schemas
@@ -58,7 +62,7 @@ TENANT_APPS = [
     'django.contrib.messages',
 
     # tenant-specific apps
-    'blog',
+    #'blog',
 ]
 
 INSTALLED_APPS = list(SHARED_APPS) + [
@@ -120,7 +124,7 @@ DATABASES = {
         # Tenant Engine
         'ENGINE': 'django_tenants.postgresql_backend',
         # set database name
-        'NAME': 'saasy-blog',
+        'NAME': 'saasy',
         # set your user details
         'USER': 'admin',
         'PASSWORD': 'password',

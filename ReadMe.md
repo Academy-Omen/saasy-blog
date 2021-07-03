@@ -43,11 +43,12 @@ pip freeze > requirements.txt
 ```
 ### Setup [Django Tenants](https://django-tenants.readthedocs.io/en/latest/install.html)
 
--> Setup Middleware and Database
+-> Setup Middleware and Database. First create a PostgreSQL database and
+note the user and password
 ```py
 
 MIDDLEWARE = [
-    # add this add the top
+    # add this at the top
     # django tenant middleware
     'django_tenants.middleware.main.TenantMainMiddleware',
 
@@ -61,7 +62,7 @@ DATABASES = {
         # Tenant Engine
         'ENGINE': 'django_tenants.postgresql_backend',
         # set database name
-        'NAME': 'saasy-blog',
+        'NAME': 'saasy',
         # set your user details
         'USER': 'admin',
         'PASSWORD': 'password',
@@ -80,7 +81,7 @@ DATABASE_ROUTERS = (
 -> Create tenant app
 ```bash
 python manage.py startapp tenant
-# Create Tenant Models
+# Now go ahead and Create Tenant Models
 ```
 
 -> Configure TENANT_MODEL and TENANT_DOMAIN_MODEL
@@ -88,12 +89,6 @@ python manage.py startapp tenant
 TENANT_MODEL = "tenant.Tenant"
 
 TENANT_DOMAIN_MODEL = "tenant.Domain"
-```
-
--> Make migrations and Apply
-```bash
-# create migrations files
-python manage.py makemigrations
 ```
 
 -> Setup SHARED_APPS and TENANT_APPS
@@ -136,3 +131,25 @@ INSTALLED_APPS = list(SHARED_APPS) + [
 ]
 
 ```
+
+-> Make migrations and Apply to database
+```bash
+# create migrations files
+python manage.py makemigrations
+# You may need to run migrations for specific app
+python manage.py makemigrations blog
+# Apply migrations 
+python manage.py migrate_schemas
+```
+
+-> Setup Initial User, Tenant and Admin
+```bash
+# create first user
+python manage.py createsuperuser
+# Create the Public Schema
+python manage.py create_tenant
+# Create the Administrator
+python manage.py create_tenant_superuser
+python manage.py runserver
+```
+
