@@ -186,6 +186,15 @@ class TenantMiddleware(TenantMainMiddleware):
         return tenant
 
 ```
+-> Add the middleware
+```py
+    #.
+    #.
+    # custom tenant middleware
+    'core.middleware.TenantMiddleware',
+    #.
+    #.
+```
 
 -> Modify Home View
 
@@ -203,3 +212,5 @@ class TenantMiddleware(TenantMainMiddleware):
         'articles': featured
     }
 ```
+
+##### For more information check the [django tenant docs](https://django-tenants.readthedocs.io/)
