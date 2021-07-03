@@ -16,7 +16,7 @@
     <header>
       <nav class = "navbar">
         <div class = "container">
-          <a href = "{% url 'blog:home' %}" class = "navbar-brand">Academy.Omen</a>
+          <a href = "{% url 'blog:home' %}" class = "navbar-brand">{{ name }}</a>
           <div class = "navbar-nav">
             <a href = "{% url 'blog:home' %}">home</a>
             <a href = "{% url 'blog:articles' %}">articles</a>
