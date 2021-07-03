@@ -77,6 +77,25 @@ DATABASE_ROUTERS = (
 
 ```
 
+-> Create tenant app
+```bash
+python manage.py startapp tenant
+# Create Tenant Models
+```
+
+-> Configure TENANT_MODEL and TENANT_DOMAIN_MODEL
+```py
+TENANT_MODEL = "tenant.Tenant"
+
+TENANT_DOMAIN_MODEL = "tenant.Domain"
+```
+
+-> Make migrations and Apply
+```bash
+# create migrations files
+python manage.py makemigrations
+```
+
 -> Setup SHARED_APPS and TENANT_APPS
 ```py
 # Application definition

@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 """
 SHARED_APPS = [
     'django_tenants',  # mandatory
-    #'tenant',  # you must list the app where your tenant model resides in
+    'tenant',  # you must list the app where your tenant model resides in
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +78,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+TENANT_MODEL = "tenant.Tenant"
+
+TENANT_DOMAIN_MODEL = "tenant.Domain"
 
 ROOT_URLCONF = 'core.urls'
 
