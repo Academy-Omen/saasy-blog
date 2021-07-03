@@ -38,6 +38,7 @@ python manage.py runserver
 -> Install django tenants
 ```bash
 pip install django-tenants
+pip install psycopg2
 pip freeze > requirements.txt
 ```
 ### Setup [Django Tenants](https://django-tenants.readthedocs.io/en/latest/install.html)
