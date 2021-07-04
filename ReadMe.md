@@ -122,6 +122,10 @@ SHARED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+
+    # we place blog here since we want 
+    # public schema to have the same structure like tenant apps
+    'blog',
 ]
 """
     These app's data are stored on their specific schemas

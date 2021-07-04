@@ -62,7 +62,7 @@ TENANT_APPS = [
     'django.contrib.messages',
 
     # tenant-specific apps
-    #'blog',
+    'blog',
 ]
 
 INSTALLED_APPS = list(SHARED_APPS) + [
