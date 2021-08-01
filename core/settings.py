@@ -129,7 +129,7 @@ DATABASES = {
         # set database name
         'NAME': 'saasy',
         # set your user details
-        'USER': 'admin',
+        'USER': 'omen',
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'POST': '5432'

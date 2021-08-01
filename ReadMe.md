@@ -9,6 +9,8 @@
 ```bash
 # Make sure you have git installed
 git clone https://github.com/Academy-Omen/django-blogx.git
+# clone with SSH
+git clone git@github.com:Academy-Omen/django-blogx.git
 ```
 
 -> Create Virtual environment
@@ -17,7 +19,7 @@ git clone https://github.com/Academy-Omen/django-blogx.git
 # Windows
 py -3 -m venv env
 # Linux and Mac
-python -m venv env
+python3 -m venv env
 ```
 
 -> Activate environment
